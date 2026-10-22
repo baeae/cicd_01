@@ -3,7 +3,6 @@
 name: Github Actions 실행시켜보기
 
 # Event : 실행되는 시점을 설정
-# main은 이벤트에 연결되는것(어떤브렌치가 일을하면(push) jobs 작업을 해주세요)
 # main이라는 브랜치에 push 될 때 아래 Workflow를 실행
 on:
   push:
@@ -19,13 +18,19 @@ jobs:
     runs-on: ubuntu-latest
 
     # Step : 특정 작업을 수행하는 가장 작은 단위
-    # 리눅스 명령어 사용
     # Job은 여러 Step들로 구성되어 있다.
     steps:
       - name: Hello World 찍기 # Step에 이름 붙이는 기능
-        run: echo "Hello World" # 실행시킬 명령어 작성(run: 실제로 일하는것)
+        run: echo "Hello World" # 실행시킬 명령어 작성
 
       - name: 여러 명령어 문장 작성하기
-        run: | # 두줄로 출력
+        run: |
           echo "Have a nice day"
           echo "Good luck"
+
+      # 참고: https://docs.github.com/en/actions/learn-github-actions/variables
+      # 변수를 쓸때 $ 사용
+      - name: Github Actions 자체에 저장되어 있는 변수 사용해보기
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
